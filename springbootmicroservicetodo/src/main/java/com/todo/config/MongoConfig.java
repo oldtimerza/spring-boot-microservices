@@ -34,12 +34,14 @@ public class MongoConfig extends AbstractMongoConfiguration {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
+
         MongoClient mongoClient = null;
         try {
             mongoClient = mongo.newMongo();
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
+
         return mongoClient;
     }
 
