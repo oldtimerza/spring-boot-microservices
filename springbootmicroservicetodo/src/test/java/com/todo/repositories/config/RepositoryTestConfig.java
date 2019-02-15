@@ -1,4 +1,4 @@
-package com.todo.config;
+package com.todo.repositories.config;
 
 import com.mongodb.MongoClient;
 import de.flapdoodle.embed.mongo.tests.MongodForTestsFactory;
@@ -15,15 +15,15 @@ import java.io.IOException;
 
 @Configuration
 @EnableMongoRepositories
-public class MongoConfig extends AbstractMongoConfiguration {
+public class RepositoryTestConfig extends AbstractMongoConfiguration {
 
-    private final Logger logger = LoggerFactory.getLogger(MongoConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(RepositoryTestConfig.class);
     private static final String MONGO_DB_URL = "localhost";
-    private static final String MONGO_DB_NAME = "todo_db";
+    private static final String MONGO_DB_NAME = "test_db";
 
     @PostConstruct
     protected void postConstruct() {
-        logger.info("Mongo config setup");
+        logger.info("Mongo Test config setup");
     }
 
     @Override
