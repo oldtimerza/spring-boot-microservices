@@ -20,7 +20,7 @@ public class TodoItemRepositoryTests {
 
     @Test
     public void shouldGetAllTodoItemsPaged(){
-        Page<TodoItem> items = todoItemRepository.findAll(new PageRequest(0,10 ));
-        Assert.assertEquals(items.getSize(), 3);
+        Page<TodoItem> items = todoItemRepository.findAll(PageRequest.of(0,10 ));
+        Assert.assertEquals(10, items.getSize());
     }
 }

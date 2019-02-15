@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = "com.todo.repositories")
 public class RepositoryTestConfig extends AbstractMongoConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(RepositoryTestConfig.class);
