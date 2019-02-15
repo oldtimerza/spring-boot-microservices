@@ -1,12 +1,11 @@
 package com.todo.models;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Document(collection = "todo-items")
 public class TodoItem {
-    @Id
-    private Long id;
     private String message;
     private boolean completed;
 }
