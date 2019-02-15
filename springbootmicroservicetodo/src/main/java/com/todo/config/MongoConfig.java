@@ -19,7 +19,7 @@ public class MongoConfig {
     private static final String MONGO_DB_NAME = "todo_db";
 
     @PostConstruct
-    private void postConstruct(){
+    private void postConstruct() {
         logger.info("Mongo config setup");
     }
 

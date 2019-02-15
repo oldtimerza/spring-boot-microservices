@@ -9,7 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- Web dependancies -->
+        <!-- Web dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -28,7 +28,7 @@
             <version>2.2.0</version>
         </dependency>
 
-        <!-- Test dependancies -->
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

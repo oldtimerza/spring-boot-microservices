@@ -11,9 +11,8 @@ public class TodoConfig {
     Logger logger = LoggerFactory.getLogger(TodoConfig.class);
 
     @PostConstruct
-    private void postConstruct(){
+    private void postConstruct() {
         logger.info("Todo config setup");
     }
-
 
 }
