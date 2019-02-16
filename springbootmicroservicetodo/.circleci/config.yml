@@ -1,32 +1,29 @@
 version: 2
 jobs:
-  deploy:
-    docker:
-      - image: circleci/node:8
+build:
+  docker:
+    - image: circleci/openjdk:8-jdk-browser
     steps:
       - checkout
-      - run:
-          name: Set access to setup-kubectl.sh
-          command: |
-            chmod +x ./.circleci/setup-kubectl.sh
-      - run:
-          name: Setup kubectl
-          command: |
-            ./.circleci/setup-kubectl.sh
-      - run:
-          name: Set access to kubernetes.sh
-          command: |
-            chmod +x ./.circleci/kubernetes.sh
-      - run:
-          name: Run kubectl deployment and service setup
-          command: |
-            ./.circleci/kubernetes.sh
+      - restore_cache:
+          key: todo-{{ checksum: pom.xml}}
+      - run: mvn clean install
+      - save_cache:
+          key: todo-{{ checksum: pom.xml}}
+deploy:
+  docker:
+  - image:  circleci/openjdk:8-jdk-browser
+  steps:
+  - checkout
 
 workflows:
   version: 2
-  build:
+  build-deploy:
     jobs:
-      - build
-          filters:
-            branches:
-              only: master
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
