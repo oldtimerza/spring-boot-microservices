@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run:
+          name: Set access to setup-kubectl.sh
+          command: |
+            chmod +x ./.circleci/setup-kubectl.sh
+      - run:
+          name: Setup kubectl
+          command: |
+            ./.circleci/setup-kubectl.sh
+      - run:
+          name: Set access to kubernetes.sh
+          command: |
+            chmod +x ./.circleci/kubernetes.sh
+      - run:
+          name: Run kubectl deployment and service setup
+          command: |
+            ./.circleci/kubernetes.sh
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+          filters:
+            branches:
+              only: master

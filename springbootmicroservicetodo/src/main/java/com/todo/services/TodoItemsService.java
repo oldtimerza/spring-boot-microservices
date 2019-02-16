@@ -24,7 +24,7 @@ public class TodoItemsService {
     }
 
     public Page<TodoItem> getItems(int page, int size) {
-        logger.info("getItems: page %s, size %s", page, size);
+        logger.info("getItems: page {}, size {}", page, size);
         return todoItemRepository.findAll(PageRequest.of(page, size));
     }
 }

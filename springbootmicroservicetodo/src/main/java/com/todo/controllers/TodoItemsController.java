@@ -1,6 +1,6 @@
 package com.todo.controllers;
 
-import com.todo.clientexceptions.FailedToRetrieveException;
+import com.todo.exceptions.FailedToRetrieveException;
 import com.todo.models.TodoItem;
 import com.todo.services.TodoItemsService;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class TodoItemsController {
         try {
             return todoItemsService.getItems(page, size);
         } catch (Exception e) {
-            logger.error("getPage: page %s, size %s", page, size);
+            logger.error("getPage: page {}, size {}", page, size);
             throw new FailedToRetrieveException(RESOURCE_TYPE);
         }
     }

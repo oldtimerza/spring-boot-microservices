@@ -7,6 +7,7 @@
 
 # User-specific stuff
 .idea/**/workspace.xml
+.idea/**/encodings.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
@@ -76,3 +77,6 @@ fabric.properties
 modules.xml
 .idea/misc.xml
 *.ipr
+
+### Maven target ###
+target/
