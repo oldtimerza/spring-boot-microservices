@@ -79,6 +79,9 @@
                 <version>1.4.9</version>
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}</JAR_FILE>
+                    </buildArgs>
                 </configuration>
             </plugin>
         </plugins>
