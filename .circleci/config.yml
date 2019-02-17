@@ -54,11 +54,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Build docker image
-          command: mvn package
-      - run:
           name: Push docker image
-          command: mvn dockerfile:push
+          command: mvn -s .mvn/wrapper/settings.xml dockerfile:push
 
 workflows:
   version: 2
