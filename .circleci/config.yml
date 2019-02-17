@@ -54,6 +54,10 @@ jobs:
       - setup_remote_docker
 
       - run:
+          name: Build JAR
+          command: mvn package
+
+      - run:
           name: Build docker image
           command: mvn dockerfile:build
 
