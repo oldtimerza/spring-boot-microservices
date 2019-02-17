@@ -3,17 +3,15 @@ A place to practice setting up from scratch a set of spring boot microservices
 
 Goal:
 
-    The goal of this project is:
+    - Setup a SpringBoot api
 
-    - Setup a springboot api
-
-    - Connect it to a mongo database
+    - Connect it to a Mongo NoSQL database
 
     - Improve understanding of API best practice.
 
     - Hone skills on good software practices like : logging, code cleanliness and exception handling.
 
-    - Practive devops skills such as CI setup, kubernetes cluster setup and docker configuration.
+    - Practice DevOps skills such as CI setup, kubernetes cluster setup and docker configuration.
 
     - Practice TDD.
 
