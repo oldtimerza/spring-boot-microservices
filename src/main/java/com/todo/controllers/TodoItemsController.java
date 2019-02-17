@@ -25,11 +25,11 @@ public class TodoItemsController {
 
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Page<TodoItem> getPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public Page<TodoItem> getPage(@RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         try {
-            return todoItemsService.getItems(page, size);
+            return todoItemsService.getItems(offset, limit);
         } catch (Exception e) {
-            logger.error("getPage: page {}, size {}", page, size);
+            logger.error("getPage: page {}, size {}", offset, limit);
             throw new FailedToRetrieveException(RESOURCE_TYPE);
         }
     }

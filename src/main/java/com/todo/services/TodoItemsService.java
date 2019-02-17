@@ -23,8 +23,8 @@ public class TodoItemsService {
         this.todoItemRepository = todoItemRepository;
     }
 
-    public Page<TodoItem> getItems(int page, int size) {
-        logger.info("getItems: page {}, size {}", page, size);
-        return todoItemRepository.findAll(PageRequest.of(page, size));
+    public Page<TodoItem> getItems(int offset, int limit) {
+        logger.info("getItems: page {}, size {}", offset, limit);
+        return todoItemRepository.findAll(PageRequest.of(offset, limit));
     }
 }

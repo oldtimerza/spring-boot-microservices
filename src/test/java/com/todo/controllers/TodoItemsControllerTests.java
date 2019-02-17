@@ -54,8 +54,8 @@ public class TodoItemsControllerTests {
         when(todoItemsService.getItems(anyInt(), anyInt())).thenReturn(todoItemsPage);
 
         ResultActions result = mockMvc.perform(get("/todos")
-                .param("page", "0")
-                .param("size", "1")
+                .param("offset", "0")
+                .param("limit", "1")
                 .accept(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isOk())
