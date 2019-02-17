@@ -53,7 +53,7 @@ public class TodoItemsControllerTests {
         Page<TodoItem> todoItemsPage = new PageImpl<TodoItem>(todoItems);
         when(todoItemsService.getItems(anyInt(), anyInt())).thenReturn(todoItemsPage);
 
-        ResultActions result = mockMvc.perform(get("")
+        ResultActions result = mockMvc.perform(get("/todos")
                 .param("page", "0")
                 .param("size", "1")
                 .accept(MediaType.APPLICATION_JSON));

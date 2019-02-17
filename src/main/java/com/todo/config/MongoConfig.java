@@ -18,7 +18,6 @@ import java.io.IOException;
 public class MongoConfig extends AbstractMongoConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(MongoConfig.class);
-    private static final String MONGO_DB_URL = "localhost";
     private static final String MONGO_DB_NAME = "todo_db";
 
     @PostConstruct
@@ -43,12 +42,6 @@ public class MongoConfig extends AbstractMongoConfiguration {
         }
 
         return mongoClient;
-    }
-
-    @Bean
-    protected MongoTemplate mongoTemplate(MongoClient mongoClient) {
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoClient, getDatabaseName());
-        return mongoTemplate;
     }
 
     @Override

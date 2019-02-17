@@ -18,7 +18,6 @@ import java.io.IOException;
 public class RepositoryTestConfig extends AbstractMongoConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(RepositoryTestConfig.class);
-    private static final String MONGO_DB_URL = "localhost";
     private static final String MONGO_DB_NAME = "test_db";
 
     @PostConstruct
@@ -41,12 +40,6 @@ public class RepositoryTestConfig extends AbstractMongoConfiguration {
             logger.error(e.getMessage());
         }
         return mongoClient;
-    }
-
-    @Bean
-    protected MongoTemplate mongoTemplate(MongoClient mongoClient) {
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoClient, getDatabaseName());
-        return mongoTemplate;
     }
 
     @Override
