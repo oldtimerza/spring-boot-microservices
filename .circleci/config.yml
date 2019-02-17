@@ -39,3 +39,4 @@ jobs:
 
       # run tests!
       - run: mvn test
+      - run: mvn clean install
