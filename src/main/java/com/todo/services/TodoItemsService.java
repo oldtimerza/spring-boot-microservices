@@ -27,4 +27,8 @@ public class TodoItemsService {
         logger.info("getItems: page {}, size {}", offset, limit);
         return todoItemRepository.findAll(PageRequest.of(offset, limit));
     }
+
+    public TodoItem createItem(TodoItem item){
+       return todoItemRepository.save(item);
+    }
 }

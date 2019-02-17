@@ -21,9 +21,8 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TodoItemsControllerTests {
@@ -63,5 +62,24 @@ public class TodoItemsControllerTests {
                 .andExpect(jsonPath("$.content.length()").value(todoItemsPage.getTotalElements()))
                 .andExpect(jsonPath("$.content[0].message").value(message))
                 .andExpect(jsonPath("$.content[0].completed").value(completed));
+    }
+
+    @Test
+    public void shouldCreateItem() throws Exception {
+        String message = "New Item";
+        boolean completed = false;
+        TodoItem item = new TodoItem(message, completed);
+        when(todoItemsService.createItem(item)).thenReturn(item);
+
+        String jsonItem = "{\"message\":\""+message+"\", \"completed\": false}";
+        ResultActions result = mockMvc.perform(post("/todos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonItem)
+                .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(jsonItem));
+
     }
 }

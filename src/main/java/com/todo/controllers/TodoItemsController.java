@@ -1,5 +1,6 @@
 package com.todo.controllers;
 
+import com.todo.exceptions.FailedToCreateException;
 import com.todo.exceptions.FailedToRetrieveException;
 import com.todo.models.TodoItem;
 import com.todo.services.TodoItemsService;
@@ -31,6 +32,17 @@ public class TodoItemsController {
         } catch (Exception e) {
             logger.error("getPage: page {}, size {}", offset, limit);
             throw new FailedToRetrieveException(RESOURCE_TYPE);
+        }
+    }
+
+    @RequestMapping(value = "/todos", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public TodoItem createItem(@RequestBody TodoItem item){
+        try{
+           return todoItemsService.createItem(item);
+        }catch (Exception e){
+            logger.error("createItem: item {}", item);
+            throw new FailedToCreateException(item);
         }
     }
 }

@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,16 +18,16 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TodoItemsServiceTests {
 
-    private TodoItemsService todoItemsService;
-
+    @Mock
     private TodoItemRepository todoItemRepository;
+
+    @InjectMocks
+    private TodoItemsService todoItemsService;
 
     private Page<TodoItem> itemsPage;
 
@@ -40,11 +42,7 @@ public class TodoItemsServiceTests {
         items.add(item);
         itemsPage = new PageImpl<TodoItem>(items);
 
-        todoItemRepository = mock(TodoItemRepository.class);
-
         when(todoItemRepository.findAll(any(PageRequest.class))).thenReturn(itemsPage);
-
-        todoItemsService = new TodoItemsService(todoItemRepository);
     }
 
     @Test
@@ -52,7 +50,21 @@ public class TodoItemsServiceTests {
         int page = 0;
         int size = 1;
         Page<TodoItem> resultsPage = todoItemsService.getItems(page, size);
+
         verify(todoItemRepository).findAll(eq(PageRequest.of(page, size)));
         Assert.assertEquals(itemsPage, resultsPage);
+    }
+
+    @Test
+    public void shouldCreateItem() {
+        String message = "New item";
+        boolean completed = false;
+
+        TodoItem item = new TodoItem(message, completed);
+        when(todoItemRepository.save(any(TodoItem.class))).thenReturn(item);
+
+        todoItemsService.createItem(item);
+
+        verify(todoItemRepository).save(eq(item));
     }
 }

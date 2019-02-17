@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,6 +32,10 @@ public class TodoItemRepositoryTests {
 
     @Before
     public void Setup(){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("message").exists(true));
+        mongoTemplate.findAllAndRemove(query,TodoItem.class);
+        mongoTemplate.remove(TodoItem.class);
         items = new ArrayList<TodoItem>();
         TodoItem testItem = new TodoItem();
         testItem.setCompleted(false);
@@ -45,5 +51,18 @@ public class TodoItemRepositoryTests {
         Page<TodoItem> itemsPage = todoItemRepository.findAll(PageRequest.of(0,10 ));
         List<TodoItem> actualItems = itemsPage.getContent();
         Assert.assertEquals(items, actualItems);
+    }
+
+    @Test
+    public void shouldCreateNewTodoItem(){
+        TodoItem item = new TodoItem();
+        item.setMessage("Create a new Item");
+        item.setCompleted(true);
+        todoItemRepository.save(item);
+
+        List<TodoItem> items = mongoTemplate.findAll(TodoItem.class);
+        Assert.assertEquals(items.size(), 2);
+        TodoItem newItem = items.get(1);
+        Assert.assertEquals(item, newItem);
     }
 }
