@@ -45,6 +45,10 @@ jobs:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
     steps:
+      - checkout
+      
+      - setup_remote_docker
+
       - run:
           name: Build docker image and push to docker hub
           command: mvn deploy
