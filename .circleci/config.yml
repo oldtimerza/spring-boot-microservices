@@ -41,9 +41,13 @@ jobs:
       - run: mvn clean install
 
   deploy:
-    - run:
-        name: Build docker image and push to docker hub
-        command: mvn deploy
+    docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - run:
+          name: Build docker image and push to docker hub
+          command: mvn deploy
 
 workflows:
   version: 2
