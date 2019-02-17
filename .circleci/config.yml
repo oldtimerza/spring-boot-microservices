@@ -54,8 +54,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-        name: Create mvn settings file
-        command: sed -e s/SECURE_PASSWORD/${SECURE_PASSWORD}/g .mvn/wrapper/settings.tmpl > .mvn/wrapper/settings.xml
+          name: Create mvn settings file
+          command: sed -e s/SECURE_PASSWORD/${SECURE_PASSWORD}/g .mvn/wrapper/settings.tmpl > .mvn/wrapper/settings.xml
 
       - run:
           name: Push docker image
