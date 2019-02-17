@@ -1,4 +1,3 @@
-kubectl --kubeconfig="./.circleci/blade-express-cluster-kubeconfig.yaml" apply -f ./.circleci/frontend-service.yaml
-kubectl --kubeconfig="./.circleci/blade-express-cluster-kubeconfig.yaml" apply -f ./.circleci/mail-service.yaml
-kubectl --kubeconfig="./.circleci/blade-express-cluster-kubeconfig.yaml" apply -f ./.circleci/ingress.yaml
-kubectl --kubeconfig="./.circleci/blade-express-cluster-kubeconfig.yaml" get services
+kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" apply -f ./infrastructure-as-code/kubernetes/deployment.yaml
+kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" apply -f ./infrastructure-as-code/kubernetes/load-balancer.yaml
+kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" get services
