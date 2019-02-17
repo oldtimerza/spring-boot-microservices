@@ -50,7 +50,13 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Build docker image and push to docker hub
+          name: Build docker image
+          command: mvn package
+      - run:
+          name: Push docker image
+          command: mvn dockerfile:push
+      - run:
+          name: Deploy
           command: mvn deploy
 
 workflows:
