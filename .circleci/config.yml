@@ -71,12 +71,23 @@ jobs:
 
       - run:
           name: Create kubeconfig
-          command: sed -e 's/CERT_AUTH/${CERT_AUTH}/g;s/SERVER/${SERVER}/g;s/CLIENT_CERT/${CLIENT_CERT}/g;s/CLIENT_KEY/${CLIENT_KEY}/g' infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.xml
+          command: |
+            sed -e 's/CERT_AUTH/${CERT_AUTH}/g;s/SERVER/${SERVER}/g;s/CLIENT_CERT/${CLIENT_CERT}/g;s/CLIENT_KEY/${CLIENT_KEY}/g' infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.xml
+
+      - run:
+          name: Set access to setup-kubectl.sh
+          command: |
+            chmod +x ./infrastructure-as-code/setup/setup-kubectl.sh
 
       - run:
           name: Setup kubectl
           command: |
             ./infrastructure-as-code/setup/setup-kubectl.sh
+
+      - run:
+          name: Set access to kubernetes.sh
+          command: |
+            chmod +x ./infrastructure-as-code/setup/kubernetes.sh
 
       - run:
           name: Run kubectl deployment and service setup
