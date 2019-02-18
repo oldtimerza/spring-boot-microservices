@@ -82,6 +82,11 @@ jobs:
           command: sed -e s/CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
+          name: Set access to kubeconfig
+          command: |
+            chmod +x ./infrastructure-as-code/config/kubeconfig.yaml
+
+      - run:
           name: Show kubeconfig contents
           command: echo "$(infrastructure-as-code/config/kubeconfig.yaml)"
 
