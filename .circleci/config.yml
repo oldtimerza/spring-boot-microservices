@@ -72,9 +72,9 @@ jobs:
       - run:
           name: Create kubeconfig
           command: |
-            sed -e s/CERT_AUTH/${CERT_AUTH}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl && |
-            sed -e s/SERVER/${SERVER}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl && |
-            sed -e s/CLIENT_CERT/${CLIENT_CERT}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl && |
+            sed -e s/CERT_AUTH/${CERT_AUTH}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl &&
+            sed -e s/SERVER/${SERVER}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl &&
+            sed -e s/CLIENT_CERT/${CLIENT_CERT}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl && 
             sed -e s/CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
