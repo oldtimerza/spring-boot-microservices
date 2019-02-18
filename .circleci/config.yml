@@ -85,14 +85,14 @@ jobs:
             ./infrastructure-as-code/setup/setup-kubectl.sh
 
       - run:
-          name: Set access to kubernetes.sh
+          name: Set access to setup-cluster.sh
           command: |
-            chmod +x ./infrastructure-as-code/setup/kubernetes.sh
+            chmod +x ./infrastructure-as-code/setup/setup-cluster.sh
 
       - run:
           name: Run kubectl deployment and service setup
           command: |
-            ./infrastructure-as-code/setup/kubernetes.sh
+            ./infrastructure-as-code/setup/setup-cluster.sh
 
 workflows:
   version: 2
