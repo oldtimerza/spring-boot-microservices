@@ -69,14 +69,6 @@ jobs:
           name: Push docker image
           command: mvn -s .mvn/wrapper/settings.xml dockerfile:push
 
-      - run:
-          name: Set access to kubeconfig.tmpl
-          command: |
-            chmod +x ./infrastructure-as-code/config/kubeconfig.tmpl
-
-      - run:
-          name: Show kubeconfig.tmpl contents
-          command:  cat infrastructure-as-code/config/kubeconfig.tmpl
 
       - run:
           name: Replace CERT_AUTH
@@ -91,13 +83,22 @@ jobs:
           command: sed -e s/CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
+          name: Set access to kubeconfig.tmpl
+          command: |
+            chmod +x ./infrastructure-as-code/config/kubeconfig.tmpl
+
+      - run:
+          name: Show kubeconfig.tmpl contents
+          command:  cat infrastructure-as-code/config/kubeconfig.tmpl
+
+      - run:
           name: Set access to kubeconfig.yaml
           command: |
             chmod +x ./infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
           name: Show kubeconfig.yaml contents
-          command: echo "$(cat infrastructure-as-code/config/kubeconfig.yaml)"
+          command:  cat infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
           name: Set access to setup-kubectl.sh
