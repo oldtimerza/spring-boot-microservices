@@ -70,12 +70,20 @@ jobs:
           command: mvn -s .mvn/wrapper/settings.xml dockerfile:push
 
       - run:
-          name: Create kubeconfig
-          command: |
-            sed -e s/CERT_AUTH/${CERT_AUTH}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl &&
-            sed -e s/SERVER/${SERVER}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl &&
-            sed -e s/CLIENT_CERT/${CLIENT_CERT}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl && 
-            sed -e s/CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.yaml
+          name: Replace CERT_AUTH
+          command: sed -e s/CERT_AUTH/${CERT_AUTH}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
+
+      - run:
+          name: Replace SERVER
+          command: sed -e s/SERVER/${SERVER}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
+
+      - run:
+          name: Replace CLIENT_CERT
+          command: sed -e s/CLIENT_CERT/${CLIENT_CERT}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
+
+      - run:
+          name: Replace CLIENT_KEY
+          command: sed -e s/CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.yaml
 
       - run:
           name: Set access to setup-kubectl.sh
