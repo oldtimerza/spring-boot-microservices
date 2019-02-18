@@ -74,10 +74,6 @@ jobs:
           command: sed -e s/CERT_AUTH/${CERT_AUTH}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
 
       - run:
-          name: Replace SERVER
-          command: sed -e s/SERVER/${SERVER}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
-
-      - run:
           name: Replace CLIENT_CERT
           command: sed -e s/CLIENT_CERT/${CLIENT_CERT}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.tmpl
 
