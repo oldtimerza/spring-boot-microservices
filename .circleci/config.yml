@@ -69,6 +69,20 @@ jobs:
           name: Push docker image
           command: mvn -s .mvn/wrapper/settings.xml dockerfile:push
 
+      - run:
+          name: Create kubeconfig
+          command: sed -e s/CERT_AUTH/${CERT_AUTH}/g -e s/SERVER/${SERVER}/g -e s/CLIENT_CERT/${CLIENT_CERT}/g -e /CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.xml
+
+      - run:
+          name: Setup kubectl
+          command: |
+            ./infrastructure-as-code/setup/setup-kubectl.sh
+
+      - run:
+          name: Run kubectl deployment and service setup
+          command: |
+            ./infrastructure-as-code/setup/kubernetes.sh
+
 workflows:
   version: 2
   build-deploy:
