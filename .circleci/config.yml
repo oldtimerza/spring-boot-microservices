@@ -71,7 +71,7 @@ jobs:
 
       - run:
           name: Create kubeconfig
-          command: sed -e s/CERT_AUTH/${CERT_AUTH}/g -e s/SERVER/${SERVER}/g -e s/CLIENT_CERT/${CLIENT_CERT}/g -e /CLIENT_KEY/${CLIENT_KEY}/g infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.xml
+          command: sed -e 's/CERT_AUTH/${CERT_AUTH}/g;s/SERVER/${SERVER}/g;s/CLIENT_CERT/${CLIENT_CERT}/g;s/CLIENT_KEY/${CLIENT_KEY}/g' infrastructure-as-code/config/kubeconfig.tmpl > infrastructure-as-code/config/kubeconfig.xml
 
       - run:
           name: Setup kubectl
