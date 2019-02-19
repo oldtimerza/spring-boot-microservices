@@ -16,3 +16,10 @@ Goal:
     - Practice TDD.
 
     - Improve understanding of Maven and its setup and use.
+
+Currently running a simple API at:
+http://68.183.242.56/
+
+Endpoints:
+GET /todos?offset=0&limit=20
+POST /todos application/json {message: string, completed: boolean}
