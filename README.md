@@ -20,7 +20,7 @@ Goal:
 
 Currently running a simple API at:
 
-http://68.183.242.56/
+TEMPORARILY OFFLINE FOR THE TIME BEING
 
 Endpoints:
 
