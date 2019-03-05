@@ -20,7 +20,7 @@ Goal:
 
 Currently running a simple API at:
 
-TEMPORARILY OFFLINE FOR THE TIME BEING
+http://67.207.79.135/
 
 Endpoints:
 
