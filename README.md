@@ -17,11 +17,6 @@ Goal:
 
     - Improve understanding of Maven and its setup and use.
 
-
-Currently running a simple API at:
-
-http://67.207.79.135/
-
 Endpoints:
 
 GET /todos?offset=0&limit=20
