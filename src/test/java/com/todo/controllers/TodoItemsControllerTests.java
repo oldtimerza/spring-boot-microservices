@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -81,5 +82,30 @@ public class TodoItemsControllerTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(jsonItem));
 
+    }
+
+
+    @Test
+    public void shouldUpdateItems() throws Exception {
+        String message = "Incomplete Item";
+        boolean completed = false;
+        TodoItem item = new TodoItem(message, completed);
+        List<TodoItem> items = new ArrayList<TodoItem>();
+        items.add(item);
+        TodoItem completedItem = new TodoItem(message, true);
+        List<TodoItem> completedItems = new ArrayList<TodoItem>();
+        completedItems.add(completedItem);
+        when(todoItemsService.markAsCompleted(items)).thenReturn(completedItems);
+
+        String jsonItem = "[{\"message\":\""+message+"\", \"completed\": false}]";
+        ResultActions result = mockMvc.perform(put("/todos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonItem)
+                .accept(MediaType.APPLICATION_JSON));
+
+        String completedItemsJson = "[{\"message\":\""+message+"\", \"completed\": true}]";
+        result.andExpect(status().isAccepted())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(completedItemsJson));
     }
 }

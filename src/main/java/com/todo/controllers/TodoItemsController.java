@@ -2,6 +2,7 @@ package com.todo.controllers;
 
 import com.todo.exceptions.FailedToCreateException;
 import com.todo.exceptions.FailedToRetrieveException;
+import com.todo.exceptions.FailedToUpdateException;
 import com.todo.models.TodoItem;
 import com.todo.services.TodoItemsService;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 public class TodoItemsController {
@@ -43,6 +46,17 @@ public class TodoItemsController {
         }catch (Exception e){
             logger.error("createItem: item {}", item);
             throw new FailedToCreateException(item);
+        }
+    }
+
+    @RequestMapping(value = "/todos", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<TodoItem> updateItems(@RequestBody List<TodoItem> items){
+        try{
+            return todoItemsService.markAsCompleted(items);
+        }catch(Exception e){
+            logger.error("updateItems: items {}", items);
+            throw new FailedToUpdateException(items);
         }
     }
 }

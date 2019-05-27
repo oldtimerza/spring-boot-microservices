@@ -67,4 +67,18 @@ public class TodoItemsServiceTests {
 
         verify(todoItemRepository).save(eq(item));
     }
+
+    @Test
+    public void markAsCompleted(){
+        TodoItem incompleteItem = new TodoItem("Incomplete", false);
+        List<TodoItem> items = new ArrayList<TodoItem>();
+        items.add(incompleteItem);
+
+        todoItemsService.markAsCompleted(items);
+
+        TodoItem expectedItem = new TodoItem("Incomplete", true);
+        List<TodoItem> expectedItems = new ArrayList<TodoItem>();
+        expectedItems.add(expectedItem);
+        verify(todoItemRepository).saveAll(eq(expectedItems));
+    }
 }

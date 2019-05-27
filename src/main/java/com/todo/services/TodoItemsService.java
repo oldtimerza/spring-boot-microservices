@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service
 public class TodoItemsService {
@@ -28,7 +30,17 @@ public class TodoItemsService {
         return todoItemRepository.findAll(PageRequest.of(offset, limit));
     }
 
-    public TodoItem createItem(TodoItem item){
-       return todoItemRepository.save(item);
+    public TodoItem createItem(TodoItem item) {
+        logger.info("createItem: item {}", item);
+        return todoItemRepository.save(item);
+    }
+
+    public List<TodoItem> markAsCompleted(List<TodoItem> items) {
+        logger.info("markAsCompleted: items {}", items);
+        for (int i = 0; i < items.size(); i++) {
+            TodoItem item = items.get(i);
+            item.setCompleted(true);
+        }
+        return todoItemRepository.saveAll(items);
     }
 }
