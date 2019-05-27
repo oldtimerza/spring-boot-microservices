@@ -1,3 +1,3 @@
-kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" apply -f ./infrastructure-as-code/kubernetes/deployment.yaml
-kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" apply -f ./infrastructure-as-code/kubernetes/load-balancer.yaml
-kubectl --kubeconfig="./infrastructure-as-code/config/kubeconfig.yaml" get services
+kubectl --kubeconfig="../config/kubeconfig.yaml" apply -f ../kubernetes/deployment.yaml
+kubectl --kubeconfig="../config/kubeconfig.yaml" apply -f ../kubernetes/load-balancer.yaml
+kubectl --kubeconfig="../config/kubeconfig.yaml" get services
